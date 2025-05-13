@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Sale - SportStyle</title>
+    <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-top">
+                <a href="index.html" class="logo">Top<span>Gear</span></a>
+                <div class="header-icons">
+                    <a href="#" class="icon">🔍</a>
+                    <a href="#" class="icon">👤</a>
+                    <a href="cart.html" class="icon" id="cartIcon">🛒 <span class="cart-count" id="cartCount">0</span></a>
+                </div>
+                <button class="mobile-menu-btn">☰</button>
+            </div>
+        </div>
+        <nav>
+            <div class="container">
+                <ul class="nav-list" id="navList">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="mens-page.html">Men</a></li>
+                    <li><a href="women.html">Women</a></li>
+                    <li><a href="footwear.html">Footwear</a></li>
+                    <li><a href="apparel.html">Apparel</a></li>
+                    <li><a href="accessories.html">Accessories</a></li>
+                    <li><a href="sale.html">Sale</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main class="featured container">
+        <h2 class="section-title">Sale Items</h2>
+        <div class="products">
+            <!-- Example sale products -->
+            <div class="product" data-id="601" data-name="Discounted Running Shoes" data-price="999.00" data-description="High-quality running shoes at a discounted price.">
+                <img src="Images/discounted running shoes.jpg" alt="Discounted Running Shoes" />
+                <div class="product-info">
+                    <h3>Discounted Running Shoes</h3>
+                    <p>High-quality at a discount</p>
+                    <div class="product-action">
+                        <span class="price">P 999.00</span>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+            <div class="product" data-id="602" data-name="Sale Track Jacket" data-price="699.00" data-description="Track jacket available at a special sale price.">
+                <img src="Images/sale track jacket.jpg" alt="Sale Track Jacket" />
+                <div class="product-info">
+                    <h3>Sale Track Jacket</h3>
+                    <p>Special sale price</p>
+                    <div class="product-action">
+                        <span class="price">P 699.00</span>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+            <div class="product" data-id="603" data-name="Discounted Sports Cap" data-price="149.00" data-description="Sports cap at a discounted price.">
+                <img src="Images/discounted sports cap.jpg" alt="Discounted Sports Cap" />
+                <div class="product-info">
+                    <h3>Discounted Sports Cap</h3>
+                    <p>Discounted price</p>
+                    <div class="product-action">
+                        <span class="price">P 149.00</span>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // JavaScript for cart functionality (same as index.html)
+        function formatPrice(price) {
+            return 'R ' + price.toFixed(2);
+        }
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        const cartCountEl = document.getElementById('cartCount');
+        const addToCartButtons = document.querySelectorAll('.add-to-cart');
+        function updateCartCount() {
+            const count = cart.reduce((sum, item) => sum + item.quantity, 0);
+            cartCountEl.textContent = count;
+        }
+        function saveCart() {
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCartCount();
+        }
+        function addItemToCart(id, name, price, image) {
+            const existingItem = cart.find(item => item.id === id);
+            if (existingItem) {
+                existingItem.quantity++;
+            } else {
+                cart.push({ id, name, price, image, quantity: 1 });
+            }
+            saveCart();
+            alert(`${name} added to cart.`);
+        }
+        addToCartButtons.forEach(button => {
+            button.addEventListener('click', e => {
+                const productEl = e.target.closest('.product');
+                const id = parseInt(productEl.getAttribute('data-id'));
+                const name = productEl.getAttribute('data-name');
+                const price = parseFloat(productEl.getAttribute('data-price'));
+                const image = productEl.querySelector('img').src;
+                addItemToCart(id, name, price, image);
+            });
+        });
+        updateCartCount();
+    </script>
+</body>
+</html>

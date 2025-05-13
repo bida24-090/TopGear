@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Accessories Collection - TopGear</title>
+    <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-top">
+                <a href="index.html" class="logo">Top<span>Gear</span></a>
+                <div class="header-icons">
+                    <a href="#" class="icon">🔍</a>
+                    <a href="#" class="icon">👤</a>
+                    <a href="cart.html" class="icon" id="cartIcon">🛒 <span class="cart-count" id="cartCount">0</span></a>
+                </div>
+                <button class="mobile-menu-btn">☰</button>
+            </div>
+        </div>
+        <nav>
+            <div class="container">
+                <ul class="nav-list" id="navList">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="mens-page.html">Men</a></li>
+                    <li><a href="women.html">Women</a></li>
+                    <li><a href="footwear.html">Footwear</a></li>
+                    <li><a href="apparel.html">Apparel</a></li>
+                    <li><a href="accessories.html" class="active">Accessories</a></li>
+                    <li><a href="sale.html">Sale</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main class="featured container">
+        <h2 class="section-title">Accessories Collection</h2>
+        <div class="products">
+            <!--products for accessories -->
+            <div class="product" data-id="501" data-name="Sports Water Bottle" data-price="199.00" data-description="Durable water bottle for sports and outdoor activities.">
+                <img src="Images/sports water bottle.jpg" alt="Sports Water Bottle" />
+                <div class="product-info">
+                    <h3>Sports Water Bottle</h3>
+                    <p>Durable and leak-proof</p>
+                    <div class="product-action">
+                        <span class="price">P199.00</span>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+            <div class="product" data-id="502" data-name="Fitness Gloves" data-price="299.00" data-description="Comfortable gloves for weightlifting and fitness training.">
+                <img src="Images/fitness gloves.jpg" alt="Fitness Gloves" />
+                <div class="product-info">
+                    <h3>Fitness Gloves</h3>
+                    <p>Comfortable and durable</p>
+                    <div class="product-action">
+                        <span class="price">P299.00</span>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+            <div class="product" data-id="503" data-name="Sports Headband" data-price="149.00" data-description="Sweat-absorbing headband for sports activities.">
+                <img src="Images/sports headband.jpg" alt="Sports Headband" />
+                <div class="product-info">
+                    <h3>Sports Headband</h3>
+                    <p>Sweat-absorbing and comfortable</p>
+                    <div class="product-action">
+                        <span class="price">P149.00</span>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // JavaScript for cart functionality
+        function formatPrice(price) {
+            return 'R ' + price.toFixed(2);
+        }
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        const cartCountEl = document.getElementById('cartCount');
+        const addToCartButtons = document.querySelectorAll('.add-to-cart');
+        function updateCartCount() {
+            const count = cart.reduce((sum, item) => sum + item.quantity, 0);
+            cartCountEl.textContent = count;
+        }
+        function saveCart() {
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCartCount();
+        }
+        function addItemToCart(id, name, price, image) {
+            const existingItem = cart.find(item => item.id === id);
+            if (existingItem) {
+                existingItem.quantity++;
+            } else {
+                cart.push({ id, name, price, image, quantity: 1 });
+            }
+            saveCart();
+            alert(`${name} added to cart.`);
+        }
+        addToCartButtons.forEach(button => {
+            button.addEventListener('click', e => {
+                const productEl = e.target.closest('.product');
+                const id = parseInt(productEl.getAttribute('data-id'));
+                const name = productEl.getAttribute('data-name');
+                const price = parseFloat(productEl.getAttribute('data-price'));
+                const image = productEl.querySelector('img').src;
+                addItemToCart(id, name, price, image);
+            });
+        });
+        updateCartCount();
+    </script>
+</body>
+</html>

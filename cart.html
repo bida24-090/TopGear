@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Shopping Cart - SportStyle</title>
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+        .cart-page {
+            max-width: 900px;
+            margin: 40px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+        }
+        .cart-page h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            color: #ff0000;
+        }
+        .cart-items {
+            margin-bottom: 30px;
+        }
+        .cart-item {
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid #eee;
+            padding: 15px 0;
+        }
+        .cart-item img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 6px;
+            margin-right: 20px;
+        }
+        .cart-item-details {
+            flex: 1;
+        }
+        .cart-item-title {
+            font-weight: bold;
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+        .cart-item-price {
+            color: #ff0000;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .cart-item-quantity {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .quantity-btn {
+            background-color: #f0f0f0;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        .quantity-btn:hover {
+            background-color: #ddd;
+        }
+        .remove-btn {
+            background: none;
+            border: none;
+            color: #999;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: underline;
+            margin-left: 15px;
+        }
+        .cart-summary {
+            border-top: 2px solid #ff0000;
+            padding-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+        }
+        .checkout-btn {
+            display: block;
+            width: 100%;
+            background-color: #ff0000;
+            color: white;
+            border: none;
+            padding: 15px;
+            font-size: 18px;
+            font-weight: bold;
+            text-transform: uppercase;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .checkout-btn:hover {
+            background-color: #cc0000;
+        }
+        .empty-cart {
+            text-align: center;
+            font-size: 20px;
+            color: #666;
+            padding: 40px 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-top">
+                <a href="index.html" class="logo">TheExotic<span>Shop</span></a>
+                <div class="header-icons">
+                    <a href="#" class="icon">🔍</a>
+                    <a href="#" class="icon">👤</a>
+                    <a href="cart.html" class="icon" id="cartIcon">🛒 <span class="cart-count" id="cartCount">0</span></a>
+                </div>
+                <button class="mobile-menu-btn">☰</button>
+            </div>
+        </div>
+        <nav>
+            <div class="container">
+                <ul class="nav-list" id="navList">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="mens-page.html">Men</a></li>
+                    <li><a href="women.html">Women</a></li>
+                    <li><a href="footwear.html">Footwear</a></li>
+                    <li><a href="apparel.html">Apparel</a></li>
+                    <li><a href="accessories.html">Accessories</a></li>
+                    <li><a href="sale.html">Sale</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main class="cart-page">
+        <h1>Your Shopping Cart</h1>
+        <div class="cart-items" id="cartItems">
+            <!-- Cart items-->
+        </div>
+        <div class="cart-summary">
+            <span>Subtotal:</span>
+            <span id="cartSubtotal">P 0.00</span>
+        </div>
+        <button class="checkout-btn" id="checkoutBtn">Proceed to Purchase</button>
+    </main>
+
+    <script>
+        // Utility to format price
+        function formatPrice(price) {
+            return 'P ' + price.toFixed(2);
+        }
+
+        // Load cart from localStorage or initialize empty
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+        const cartItemsContainer = document.getElementById('cartItems');
+        const cartSubtotalEl = document.getElementById('cartSubtotal');
+        const cartCountEls = document.querySelectorAll('#cartCount');
+
+        // Update cart count in header
+        function updateCartCount() {
+            const count = cart.reduce((sum, item) => sum + item.quantity, 0);
+            cartCountEls.forEach(el => el.textContent = count);
+        }
+
+        // Save cart to localStorage
+        function saveCart() {
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCartCount();
+        }
+
+        // Remove item from cart by id
+        function removeItem(id) {
+            cart = cart.filter(item => item.id !== id);
+            renderCart();
+            saveCart();
+        }
+
+        // Change quantity of item by id
+        function changeQuantity(id, delta) {
+            const item = cart.find(i => i.id === id);
+            if (!item) return;
+            item.quantity += delta;
+            if (item.quantity < 1) item.quantity = 1;
+            renderCart();
+            saveCart();
+        }
+
+        // Render cart items
+        function renderCart() {
+            cartItemsContainer.innerHTML = '';
+            if (cart.length === 0) {
+                cartItemsContainer.innerHTML = '<p class="empty-cart">Your cart is empty.</p>';
+                cartSubtotalEl.textContent = formatPrice(0);
+                return;
+            }
+            let subtotal = 0;
+            cart.forEach(item => {
+                subtotal += item.price * item.quantity;
+                const itemEl = document.createElement('div');
+                itemEl.className = 'cart-item';
+                itemEl.innerHTML = `
+                    <img src="${item.image}" alt="${item.name}" />
+                    <div class="cart-item-details">
+                        <div class="cart-item-title">${item.name}</div>
+                        <div class="cart-item-price">${formatPrice(item.price)}</div>
+                        <div class="cart-item-quantity">
+                            <button class="quantity-btn" data-action="decrease" data-id="${item.id}">-</button>
+                            <span>${item.quantity}</span>
+                            <button class="quantity-btn" data-action="increase" data-id="${item.id}">+</button>
+                            <button class="remove-btn" data-action="remove" data-id="${item.id}">Remove</button>
+                        </div>
+                    </div>
+                `;
+                cartItemsContainer.appendChild(itemEl);
+            });
+            cartSubtotalEl.textContent = formatPrice(subtotal);
+        }
+
+        // Handle quantity and remove button clicks
+        cartItemsContainer.addEventListener('click', e => {
+            const action = e.target.getAttribute('data-action');
+            const id = parseInt(e.target.getAttribute('data-id'));
+            if (!action || !id) return;
+            if (action === 'decrease') {
+                changeQuantity(id, -1);
+            } else if (action === 'increase') {
+                changeQuantity(id, 1);
+            } else if (action === 'remove') {
+                removeItem(id);
+            }
+        });
+
+        // Checkout button click handler
+        document.getElementById('checkoutBtn').addEventListener('click', () => {
+            if (cart.length === 0) {
+                alert('Your cart is empty.');
+                return;
+            }
+            alert('Thank you for your purchase! Your order has been placed.');
+            cart = [];
+            saveCart();
+            renderCart();
+        });
+
+        // Initialize
+        renderCart();
+        updateCartCount();
+    </script>
+</body>

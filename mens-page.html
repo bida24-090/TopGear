@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Men's Collection - SportStyle</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-top">
+                <a href="index.html" class="logo">Top<span>Gear</span></a>
+                <div class="header-icons">
+                    <a href="#" class="icon">🔍</a>
+                    <a href="#" class="icon">👤</a>
+                    <a href="cart.html" class="icon" id="cartIcon">🛒 <span class="cart-count" id="cartCount">0</span></a>
+                </div>
+                <button class="mobile-menu-btn">☰</button>
+            </div>
+        </div>
+        <nav>
+            <div class="container">
+                <ul class="nav-list" id="navList">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="mens-page.html" class="active">Men</a></li>
+                    <li><a href="women.html">Women</a></li>
+                    <li><a href="footwear.html">Footwear</a></li>
+                    <li><a href="apparel.html">Apparel</a></li>
+                    <li><a href="accessories.html">Accessories</a></li>
+                    <li><a href="sale.html">Sale</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <div class="page-banner">
+        <img src="Images/sports wear for men.jpg" alt="Men's Collection">
+        <div class="banner-content">
+            <h1>Men's Collection</h1>
+            <p>Performance wear designed for the modern athlete</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="category-filters">
+            <div class="filter-section">
+                <h3>Categories</h3>
+                <ul class="filter-options">
+                    <li><a href="#">T-Shirts & Tops</a></li>
+                    <li><a href="#">Shorts</a></li>
+                    <li><a href="#">Track Pants</a></li>
+                    <li><a href="#">Hoodies & Sweaters</a></li>
+                    <li><a href="#">Jackets</a></li>
+                    <li><a href="#">Training Gear</a></li>
+                </ul>
+            </div>
+            <div class="filter-section">
+                <h3>Brands</h3>
+                <ul class="filter-options">
+                    <li><a href="#">Nike</a></li>
+                    <li><a href="#">Adidas</a></li>
+                    <li><a href="#">Puma</a></li>
+                    <li><a href="#">New Balance</a></li>
+                    <li><a href="#">Reebok</a></li>
+                </ul>
+            </div>
+            <div class="filter-section">
+                <h3>Price Range</h3>
+                <div class="price-slider">
+                    <input type="range" min="0" max="2000" value="1000" class="slider" id="priceRange">
+                    <div class="price-range-values">
+                        <span>P0</span>
+                        <span id="priceValue">P1000</span>
+                        <span>P2000+</span>
+                    </div>
+                </div>
+            </div>
+            <div class="filter-section">
+                <h3>Size</h3>
+                <div class="size-filter">
+                    <button class="size-btn">S</button>
+                    <button class="size-btn">M</button>
+                    <button class="size-btn">L</button>
+                    <button class="size-btn">XL</button>
+                    <button class="size-btn">XXL</button>
+                </div>
+            </div>
+            <button class="btn apply-filters">Apply Filters</button>
+        </div>
+
+        <div class="product-listing">
+            <div class="product-grid-header">
+                <h2>Men's Products <span>(24 items)</span></h2>
+                <div class="sort-options">
+                    <label for="sortBy">Sort by:</label>
+                    <select id="sortBy">
+                        <option value="featured">Featured</option>
+                        <option value="newest">Newest</option>
+                        <option value="price-low">Price: Low to High</option>
+                        <option value="price-high">Price: High to Low</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="products">
+                <div class="product" data-id="101" data-name="Men's Training T-Shirt" data-price="399.00" data-description="Breathable training t-shirt with moisture-wicking technology to keep you dry during workouts.">
+                    <img src="Images/men's training t-shirt.jpg" alt="Men's Training T-Shirt">
+                    <div class="product-info">
+                        <h3>Men's Training T-Shirt</h3>
+                        <p>Breathable with moisture-wicking technology</p>
+                        <div class="product-action">
+                            <span class="price">P 399.00</span>
+                            <button class="add-to-cart">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="product" data-id="102" data-name="Men's Running Shorts" data-price="499.00" data-description="Lightweight running shorts with built-in liner and side pockets for convenient storage.">
+                    <img src="Images/men's running shorts 2.jpg" alt="Men's Running Shorts">
+                    <div class="product-info">
+                        <h3>Men's Running Shorts</h3>
+                        <p>Lightweight with built-in liner</p>
+                        <div class="product-action">
+                            <span class="price">P 499.00</span>
+                            <button class="add-to-cart">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="product" data-id="103" data-name="Men's Zip Hoodie" data-price="799.00" data-description="Comfortable full-zip hoodie perfect for pre and post workout. Features kangaroo pockets and adjustable hood.">
+                    <img src="Images/men's zipup hoodie.jpg" alt="Men's Zipup Hoodie">
+                    <div class="product-info">
+                        <h3>Men's Zip Hoodie</h3>
+                        <p>Comfortable full-zip design</p>
+                        <div class="product-action">
+                            <span class="price">P 799.00</span>
+                            <button class="add-to-cart">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="product" data-id="104" data-name="Men's Track Pants" data-price="699.00" data-description="Versatile track pants with tapered fit and zippered ankle cuffs for easy on and off.">
+                    <img src="Images/men's track pants.jpg" alt="Men's Track Pants">
+                    <div class="product-info">
+                        <h3>Men's Track Pants</h3>
+                        <p>Tapered fit with zippered ankles</p>
+                        <div class="product-action">
+                            <span class="price">P 699.00</span>
+                            <button class="add-to-cart">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="product" data-id="105" data-name="Men's Performance Polo" data-price="599.00" data-description="Stylish performance polo that transitions from the course to casual wear with ease.">
+                    <img src="Images/men's performance polo.jpg" alt="Men's Performance Polo">
+                    <div class="product-info">
+                        <h3>Men's Performance Polo</h3>
+                        <p>Stylish and versatile design</p>
+                        <div class="product-action">
+                            <span class="price">P 599.00</span>
+                            <button class="add-to-cart">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="product" data-id="106" data-name="Men's Training Jacket" data-price="999.00" data-description="Lightweight training jacket with wind and water resistance. Perfect for outdoor training in variable conditions.">
+                    <img src="Images/men's training jacket.jpg" alt="Men's Training Jacket">
+                    <div class="product-info">
+                        <h3>Men's Training Jacket</h3>
+                        <p>Wind and water resistant</p>
+                        <div class="product-action">
+                            <span class="price">P 999.00</span>
+                            <button class="add-to-cart">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="product" data-id="107" data-name="Men's Compression Shirt" data-price="599.00" data-description="Long sleeve compression shirt that provides muscle support and temperature regulation during intense workouts.">
+                    <img src="Images/men's compression shirt.jpg" alt="Men's Compression Shirt">
+                    <div class="product-info">
+                        <h3>Men's Compression Shirt</h3>
+                        <p>Muscle support and temperature regulation</p>
+                        <div class="product-action">
+                            <span class="price">P 599.00</span>
+                            <button class="add-to-cart">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="product" data-id="108" data-name="Men's Basketball Shorts" data-price="549.00" data-description="Lightweight basketball shorts with moisture-wicking fabric and side pockets for convenience.">
+                    <img src="Images/men's basketball shorts.jpg" alt="Men's Basketball Shorts">
+                    <div class="product-info">
+                        <h3>Men's Basketball Shorts</h3>
+                        <p>Lightweight with side pockets</p>
+                        <div class="product-action">
+                            <span class="price">P 549.00</span>
+                            <button class="add-to-cart">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pagination">
+                <button class="page-btn active">1</button>
+                <button class="page-btn">2</button>
+                <button class="page-btn">3</button>
+                <button class="page-btn next">Next &rarr;</button>
+            </div>
+        </div>
+    </div>
+
+    <section class="featured-brands container">
+        <h2 class="section-title">Top Men's Brands</h2>
+        <div class="brand-logos">
+            <div class="brand-logo"><span>Nike</span></div>
+            <div class="brand-logo"><span>Adidas</span></div>
+            <div class="brand-logo"><span>Puma</span></div>
+            <div class="brand-logo"><span>New Balance</span></div>
+            <div class="brand-logo"><span>Reebok</span></div>
+        </div>
+    </section>
+
+    <section class="newsletter container">
+        <div class="newsletter-content">
+            <h2>Join Our Newsletter</h2>
+            <p>Sign up to receive updates on new arrivals and special offers</p>
+            <form class="newsletter-form">
+                <input type="email" placeholder="Your email address" required>
+                <button type="submit" class="btn">Subscribe</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Shop</h3>
+                    <ul>
+                        <li><a href="men.html">Men</a></li>
+                        <li><a href="women.html">Women</a></li>
+                        <li><a href="footwear.html">Footwear</a></li>
+                        <li><a href="apparel.html">Apparel</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Help</h3>
+                    <ul>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Shipping</a></li>
+                        <li><a href="#">Returns</a></li>
+                        <li><a href="#">Size Guide</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>About</h3>
+                    <ul>
+                        <li><a href="#">Our Story</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Store Locator</a></li>
+                        <li><a href="#">Corporate Responsibility</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Connect</h3>
+                    <ul>
+                        <li><a href="#">Facebook</a></li>
+                        <li><a href="#">Instagram</a></li>
+                        <li><a href="#">Twitter</a></li>
+                        <li><a href="#">YouTube</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 SportStyle. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Product Detail Modal -->
+    <div class="modal" id="productDetailModal">
+        <div class="modal-content">
+            <span class="modal-close">&times;</span>
+            <div class="product-detail">
+                <div class="product-images">
+                    <img src="/api/placeholder/500/500" alt="Product Image" id="modalProductImage">
+                    <div class="product-thumbs">
+                        <img src="/api/placeholder/100/100" alt="Thumbnail 1" class="active">
+                        <img src="/api/placeholder/100/101" alt="Thumbnail 2">
+                        <img src="/api/placeholder/100/102" alt="Thumbnail 3">
+                    </div>
+                </div>
+                <div class="product-details">
+                    <h2 id="modalProductTitle">Product Name</h2>
+                    <span class="price" id="modalProductPrice">P 0.00</span>
+                    <p id="modalProductDescription">Product description</p>
+                    
+                    <div class="size-selector">
+                        <h4>Select Size</h4>
+                        <div class="size-options">
+                            <div class="size-option">S</div>
+                            <div class="size-option active">M</div>
+                            <div class="size-option">L</div>
+                            <div class="size-option">XL</div>
+                            <div class="size-option">XXL</div>
+                        </div>
+                    </div>
+                    
+                    <div class="color-selector">
+                        <h4>Select Color</h4>
+                        <div class="color-options">
+                            <div class="color-option active" style="background-color: #000;"></div>
+                            <div class="color-option" style="background-color: #3a86ff;"></div>
+                            <div class="color-option" style="background-color: #ff006e;"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="quantity-selector">
+                        <h4>Quantity</h4>
+                        <div class="quantity-control">
+                            <button class="quantity-btn decrease">-</button>
+                            <input type="number" value="1" min="1" class="quantity-input">
+                            <button class="quantity-btn increase">+</button>
+                        </div>
+                    </div>
+                    
+                    <button class="btn add-to-cart-detail">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cart Modal -->
+    <div class="cart-modal" id="cartModal">
+        <div class="cart-header">
+            <h3>Your Cart</h3>
+            <button class="cart-close">&times;</button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <!-- Cart items-->
+        </div>
+        <div class="cart-total">
+            <div class="cart-total-row">
+                <span>Subtotal</span>
+                <span id="cartSubtotal">P 0.00</span>
+            </div>
+            <div class="cart-total-row">
+                <span>Shipping</span>
+                <span>P 99.00</span>
+            </div>
+            <div class="cart-total-row">
+                <strong>Total</strong>
+                <strong id="cartTotal">P 0.00</strong>
+            </div>
+            <button class="btn checkout-btn">Proceed to Checkout</button>
+        </div>
+    </div>
+
+    <script>
+        // JavaScript for cart functionality
+        function formatPrice(price) {
+            return 'R ' + price.toFixed(2);
+        }
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        const cartCountEl = document.getElementById('cartCount');
+        const addToCartButtons = document.querySelectorAll('.add-to-cart');
+        function updateCartCount() {
+            const count = cart.reduce((sum, item) => sum + item.quantity, 0);
+            cartCountEl.textContent = count;
+        }
+        function saveCart() {
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCartCount();
+        }
+        function addItemToCart(id, name, price, image) {
+            const existingItem = cart.find(item => item.id === id);
+            if (existingItem) {
+                existingItem.quantity++;
+            } else {
+                cart.push({ id, name, price, image, quantity: 1 });
+            }
+            saveCart();
+            alert(`${name} added to cart.`);
+        }
+        addToCartButtons.forEach(button => {
+            button.addEventListener('click', e => {
+                const productEl = e.target.closest('.product');
+                const id = parseInt(productEl.getAttribute('data-id'));
+                const name = productEl.getAttribute('data-name');
+                const price = parseFloat(productEl.getAttribute('data-price'));
+                const image = productEl.querySelector('img').src;
+                addItemToCart(id, name, price, image);
+            });
+        });
+        updateCartCount();
+    </script>
+</body>
+</html>
