@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Apparel Collection - SportStyle</title>
+    <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-top">
+                <a href="index.html" class="logo">Top<span>Gear</span></a>
+                <div class="header-icons">
+                    <a href="#" class="icon">🔍</a>
+                    <a href="#" class="icon">👤</a>
+                    <a href="cart.html" class="icon" id="cartIcon">🛒 <span class="cart-count" id="cartCount">0</span></a>
+                </div>
+                <button class="mobile-menu-btn">☰</button>
+            </div>
+        </div>
+        <nav>
+            <div class="container">
+                <ul class="nav-list" id="navList">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="mens-page.html">Men</a></li>
+                    <li><a href="women.html">Women</a></li>
+                    <li><a href="footwear.html">Footwear</a></li>
+                    <li><a href="apparel.html">Apparel</a></li>
+                    <li><a href="accessories.html">Accessories</a></li>
+                    <li><a href="sale.html">Sale</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main class="featured container">
+        <h2 class="section-title">Apparel Collection</h2>
+        <div class="products">
+            <!--products for apparel -->
+            <div class="product" data-id="401" data-name="Sports T-Shirt" data-price="399.00" data-description="Breathable sports t-shirt for active wear.">
+                <img src="Images/sports t-shirt.jpg" alt="Sports T-Shirt" />
+                <div class="product-info">
+                    <h3>Sports T-Shirt</h3>
+                    <p>Breathable and comfortable</p>
+                    <div class="product-action">
+                        <span class="price">P399.00</span>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+            <div class="product" data-id="402" data-name="Running Shorts" data-price="299.00" data-description="Lightweight running shorts with moisture-wicking fabric.">
+                <img src="Images/running shorts.jpg" alt="Running Shorts" />
+                <div class="product-info">
+                    <h3>Running Shorts</h3>
+                    <p>Lightweight and moisture-wicking</p>
+                    <div class="product-action">
+                        <span class="price">P299.00</span>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+            <div class="product" data-id="403" data-name="Sports Jacket" data-price="899.00" data-description="Windproof and water-resistant sports jacket.">
+                <img src="Images/sports jacket.jpg" alt="Sports Jacket" />
+                <div class="product-info">
+                    <h3>Sports Jacket</h3>
+                    <p>Windproof and water-resistant</p>
+                    <div class="product-action">
+                        <span class="price">P899.00</span>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // JavaScript for cart functionality
+        function formatPrice(price) {
+            return 'R ' + price.toFixed(2);
+        }
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        const cartCountEl = document.getElementById('cartCount');
+        const addToCartButtons = document.querySelectorAll('.add-to-cart');
+        function updateCartCount() {
+            const count = cart.reduce((sum, item) => sum + item.quantity, 0);
+            cartCountEl.textContent = count;
+        }
+        function saveCart() {
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCartCount();
+        }
+        function addItemToCart(id, name, price, image) {
+            const existingItem = cart.find(item => item.id === id);
+            if (existingItem) {
+                existingItem.quantity++;
+            } else {
+                cart.push({ id, name, price, image, quantity: 1 });
+            }
+            saveCart();
+            alert(`${name} added to cart.`);
+        }
+        addToCartButtons.forEach(button => {
+            button.addEventListener('click', e => {
+                const productEl = e.target.closest('.product');
+                const id = parseInt(productEl.getAttribute('data-id'));
+                const name = productEl.getAttribute('data-name');
+                const price = parseFloat(productEl.getAttribute('data-price'));
+                const image = productEl.querySelector('img').src;
+                addItemToCart(id, name, price, image);
+            });
+        });
+        updateCartCount();
+    </script>
+</body>
+</html>

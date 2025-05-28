@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Footwear Collection - SportStyle</title>
+    <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-top">
+                <a href="index.html" class="logo">Top<span>Gear</span></a>
+                <div class="header-icons">
+                    <a href="#" class="icon">🔍</a>
+                    <a href="#" class="icon">👤</a>
+                    <a href="cart.html" class="icon" id="cartIcon">🛒 <span class="cart-count" id="cartCount">0</span></a>
+                </div>
+                <button class="mobile-menu-btn">☰</button>
+            </div>
+        </div>
+        <nav>
+            <div class="container">
+                <ul class="nav-list" id="navList">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="mens-page.html">Men</a></li>
+                    <li><a href="women.html">Women</a></li>
+                    <li><a href="footwear.html">Footwear</a></li>
+                    <li><a href="apparel.html">Apparel</a></li>
+                    <li><a href="accessories.html">Accessories</a></li>
+                    <li><a href="sale.html">Sale</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main class="featured container">
+        <h2 class="section-title">Footwear Collection</h2>
+        <div class="products">
+            <!--products for footwear -->
+            <div class="product" data-id="301" data-name="Trail Running Shoes" data-price="1599.00" data-description="Durable trail running shoes with excellent grip.">
+                <img src="Images/trail running shoes.jpg" alt="Trail Running Shoes" />
+                <div class="product-info">
+                    <h3>Trail Running Shoes</h3>
+                    <p>Durable with excellent grip</p>
+                    <div class="product-action">
+                        <span class="price">P 1,599.00</span>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+            <div class="product" data-id="302" data-name="Casual Sneakers" data-price="1299.00" data-description="Comfortable casual sneakers for everyday wear.">
+                <img src="Images/casual sneakers.jpg" alt="Casual Sneakers" />
+                <div class="product-info">
+                    <h3>Casual Sneakers</h3>
+                    <p>Comfortable for everyday wear</p>
+                    <div class="product-action">
+                        <span class="price">P 1,299.00</span>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+            <div class="product" data-id="303" data-name="Sports Sandals" data-price="799.00" data-description="Lightweight sports sandals with adjustable straps.">
+                <img src="Images/sports sandal.jpg" alt="Sports Sandals" />
+                <div class="product-info">
+                    <h3>Sports Sandals</h3>
+                    <p>Lightweight and adjustable</p>
+                    <div class="product-action">
+                        <span class="price">P 799.00</span>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // JavaScript for cart functionality (same as index.html)
+        function formatPrice(price) {
+            return 'R ' + price.toFixed(2);
+        }
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        const cartCountEl = document.getElementById('cartCount');
+        const addToCartButtons = document.querySelectorAll('.add-to-cart');
+        function updateCartCount() {
+            const count = cart.reduce((sum, item) => sum + item.quantity, 0);
+            cartCountEl.textContent = count;
+        }
+        function saveCart() {
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCartCount();
+        }
+        function addItemToCart(id, name, price, image) {
+            const existingItem = cart.find(item => item.id === id);
+            if (existingItem) {
+                existingItem.quantity++;
+            } else {
+                cart.push({ id, name, price, image, quantity: 1 });
+            }
+            saveCart();
+            alert(`${name} added to cart.`);
+        }
+        addToCartButtons.forEach(button => {
+            button.addEventListener('click', e => {
+                const productEl = e.target.closest('.product');
+                const id = parseInt(productEl.getAttribute('data-id'));
+                const name = productEl.getAttribute('data-name');
+                const price = parseFloat(productEl.getAttribute('data-price'));
+                const image = productEl.querySelector('img').src;
+                addItemToCart(id, name, price, image);
+            });
+        });
+        updateCartCount();
+    </script>
+</body>
+</html>
